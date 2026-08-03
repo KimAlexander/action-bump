@@ -1,5 +1,4 @@
-name: ⚠️ Auto release
-
+name: ⚠️ Bump ver
 on:
   workflow_dispatch:
     inputs:
