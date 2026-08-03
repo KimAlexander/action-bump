@@ -41,12 +41,11 @@ jobs:
       - name: Create PR from dev to main
         env:
           GH_TOKEN: ${{ secrets.PAT_FOR_BOT }}
-
         run: |
           gh pr create \
             --base main \
             --head develop \
-            --title "Merge dev into main" \
+            --title "Merge develop into main" \
             --body "Automated PR created by GitHub Actions."
 
 concurrency:
