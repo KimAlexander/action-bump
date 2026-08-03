@@ -11,14 +11,5 @@ module.exports = {
     tagAnnotation: "Release v${version}",
     tagName: "v${version}",
   },
-
-  hooks: {
-    "after:release": "npm run release",
-  },
-  npm: {
-    allowSameVersion: true,
-    publish: false,
-    skipChecks: true,
-  },
   verbose: true,
 };

@@ -38,6 +38,16 @@ jobs:
         run: |
           echo "Version: v${{ steps.info.outputs.version }}"
           echo "Name: ${{ steps.info.outputs.name }}"
+      - name: Create PR from dev to main
+        env:
+          GH_TOKEN: ${{ secrets.PAT_FOR_BOT }}
+
+        run: |
+          gh pr create \
+            --base main \
+            --head dev \
+            --title "Merge dev into main" \
+            --body "Automated PR created by GitHub Actions."
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
