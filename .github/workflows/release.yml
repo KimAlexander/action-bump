@@ -45,7 +45,7 @@ jobs:
         run: |
           gh pr create \
             --base main \
-            --head dev \
+            --head develop \
             --title "Merge dev into main" \
             --body "Automated PR created by GitHub Actions."
 
