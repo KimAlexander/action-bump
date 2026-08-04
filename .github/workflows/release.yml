@@ -29,6 +29,10 @@ jobs:
             echo "PAT_FOR_BOT is available"
           fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: KimAlexander/action-bump/actions/bump-ver@main # main
+        id: info
+        with:
+          githubToken: ${{ secrets.PAT_FOR_BOT }}
       - uses: KimAlexander/action-bump/actions/release-it@main # main
         id: release-it
         with:
@@ -44,8 +48,8 @@ jobs:
         run: |
           gh pr create \
             --base main \
-            --head develop \
-            --title "Merge develop into main" \
+            --head feature/bump_ver \
+            --title "Merge feature/bump_ver into main" \
             --body "Automated PR created by GitHub Actions."
 
 concurrency:
