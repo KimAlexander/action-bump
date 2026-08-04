@@ -30,6 +30,9 @@ runs:
         persist-credentials: false
         fetch-tags: true
         fetch-depth: 0
+    - shell: bash
+      name: Create feature/bump_ver branch from develop
+      run: git checkout -b feature/bump_ver origin/develop
     - uses: KimAlexander/release-it/projects/setup-git@main
       with:
         token: ${{ inputs.githubToken }}
