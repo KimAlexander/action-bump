@@ -41,7 +41,10 @@ jobs:
         run: |
           echo "Version: v${{ steps.info.outputs.version }}"
           echo "Name: ${{ steps.info.outputs.name }}"
-      - name: Create PR from dev to main
+      - name: Push branch
+        run: |
+          git push -u origin feature/bump_ver
+      - name: Create PR
         env:
           GH_TOKEN: ${{ secrets.PAT_FOR_BOT }}
         run: |

@@ -15,9 +15,6 @@ runs:
         ref: ${{ inputs.ref || github.ref }}
         persist-credentials: false
         fetch-depth: 0
-    - uses: KimAlexander/release-it/projects/setup-git@main
-      with:
-        token: ${{ inputs.githubToken }}
     - shell: bash
       name: Create feature/bump_ver branch from develop
       run: git checkout -b feature/bump_ver origin/develop
