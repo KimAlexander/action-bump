@@ -27,7 +27,6 @@ runs:
       with:
         token: ${{ inputs.githubToken }}
         ref: ${{ inputs.ref || github.ref }}
-        persist-credentials: false
         fetch-tags: true
         fetch-depth: 0
     - shell: bash
