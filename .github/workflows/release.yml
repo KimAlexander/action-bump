@@ -37,7 +37,6 @@ jobs:
         id: release-it
         with:
           githubToken: ${{ secrets.PAT_FOR_BOT }}
-      - uses: KimAlexander/action-bump/actions/release-it@develop # main
       - name: Log release outputs
         run: |
           echo "Version: v${{ steps.info.outputs.version }}"
