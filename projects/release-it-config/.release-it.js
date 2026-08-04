@@ -7,9 +7,7 @@ module.exports = {
     pushArgs: ["--follow-tags"],
     requireBranch: false,
     requireCleanWorkingDir: false,
-    requireCommits: false,
-    tagAnnotation: "Release v${version}",
-    tagName: "v${version}",
+    requireCommits: false
   },
   verbose: true,
 };
