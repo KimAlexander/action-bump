@@ -33,8 +33,8 @@ jobs:
         id: info
         with:
           githubToken: ${{ secrets.PAT_FOR_BOT }}
-      - uses: KimAlexander/action-bump/actions/release-it@main # main
-        id: release-it
+      - uses: KimAlexander/action-bump/actions/git-create-branch@main # main
+        id: git-create-branch
         with:
           mode: ${{ github.event.inputs.mode || 'minor' }}
           githubToken: ${{ secrets.PAT_FOR_BOT }}
