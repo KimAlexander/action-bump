@@ -47,9 +47,9 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT_FOR_BOT }}
         run: |
           gh pr create \
-            --base main \
+            --base develop \
             --head feature/bump_ver \
-            --title "Merge feature/bump_ver into main" \
+            --title "Merge feature/bump_ver into develop" \
             --body "Automated PR created by GitHub Actions."
 
 concurrency:
