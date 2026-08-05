@@ -29,9 +29,9 @@ runs:
       name: Create feature/bump_ver
       run: |
         base=${{ steps.info.outputs.base }}
-        git fetch origin origin/$base
+        git fetch origin $base
         git push origin --delete feature/bump_ver || true
-        git switch --no-track -c feature/bump_ver "origin/$base"
+        git switch --no-track -c feature/bump_ver "$base"
         git push --set-upstream origin feature/bump_ver
     - uses: KimAlexander/action-bump/actions/setup-git@develop
       with:
