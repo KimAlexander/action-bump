@@ -25,6 +25,9 @@ runs:
         fetch-depth: 0
     - uses: KimAlexander/action-bump/actions/read-package-json@develop
       id: info
+    - uses: KimAlexander/action-bump/actions/setup-git@develop
+      with:
+        token: ${{ inputs.githubToken }}
     - shell: bash
       name: Create feature/bump_ver
       run: |
