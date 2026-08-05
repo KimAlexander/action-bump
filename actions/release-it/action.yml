@@ -33,9 +33,6 @@ runs:
         git push origin --delete feature/bump_ver || true
         git switch --no-track -c feature/bump_ver "$base"
         git push --set-upstream origin feature/bump_ver
-    - uses: KimAlexander/action-bump/actions/setup-git@develop
-      with:
-        token: ${{ inputs.githubToken }}
     - uses: actions/setup-node@v4
       with:
         node-version: 22
