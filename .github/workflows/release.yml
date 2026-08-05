@@ -32,6 +32,7 @@ jobs:
       - uses: KimAlexander/action-bump/actions/release-it@develop # main
         id: release-it
         with:
+          mode: ${{ github.event.inputs.mode }}
           githubToken: ${{ secrets.PAT_FOR_BOT }}
       - name: Log release outputs
         run: |
