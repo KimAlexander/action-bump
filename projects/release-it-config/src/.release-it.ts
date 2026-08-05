@@ -7,7 +7,8 @@ const releaseItConfig = {
         pushArgs: ['--follow-tags'],
         requireBranch: false,
         requireCleanWorkingDir: false,
-        requireCommits: false
+        requireCommits: false,
+        tag: false
     },
     verbose: true
 };
