@@ -5,7 +5,8 @@ module.exports = {
     commitMessage: "chore(release): v${version}",
     requireBranch: false,
     requireCleanWorkingDir: false,
-    requireCommits: false
+    requireCommits: false,
+    tag: false,
   },
   verbose: true,
 };
