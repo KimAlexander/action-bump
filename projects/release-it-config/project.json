@@ -1,7 +1,20 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "release-it-config",
-  "projectType": "library",
-  "sourceRoot": "projects/release-it-config",
-  "targets": {}
+    "name": "release-it-config",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "projects/release-it-config/src",
+    "projectType": "library",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/release-it-config",
+                "main": "projects/release-it-config/src/index.ts",
+                "tsConfig": "projects/release-it-config/tsconfig.lib.json",
+                "assets": [],
+                "generatePackageJson": true
+            }
+        }
+    }
 }

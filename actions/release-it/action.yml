@@ -10,11 +10,6 @@ inputs:
     description: Increment mode
     required: false
 
-  flags:
-    description: Custom flags
-    required: false
-    default: ""
-
 outputs:
   released:
     description: was the version updated
@@ -27,16 +22,18 @@ runs:
       with:
         token: ${{ inputs.githubToken }}
         ref: ${{ inputs.ref || github.ref }}
-        fetch-tags: true
         fetch-depth: 0
+    - uses: KimAlexander/action-bump/actions/read-package-json@develop
+      id: info
     - shell: bash
-      name: Create feature/bump_ver branch from develop
+      name: Create feature/bump_ver
       run: |
-        git fetch origin develop
+        base=${{ steps.info.outputs.base }}
+        git fetch origin origin/$base
         git push origin --delete feature/bump_ver || true
-        git switch --no-track -c feature/bump_ver origin/develop
+        git switch --no-track -c feature/bump_ver "origin/$base"
         git push --set-upstream origin feature/bump_ver
-    - uses: KimAlexander/release-it/projects/setup-git@main
+    - uses: KimAlexander/action-bump/actions/setup-git@develop
       with:
         token: ${{ inputs.githubToken }}
     - uses: actions/setup-node@v4
@@ -48,4 +45,4 @@ runs:
     - shell: bash
       id: output
       run: |
-        npx release-it ${{ inputs.mode }} --ci ${{ inputs.flags }}
+        npx release-it ${{ inputs.mode }} --ci

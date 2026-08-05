@@ -1,0 +1,40 @@
+name: Create Pull Request
+description: Creates a pull request from one branch to another
+
+inputs:
+  githubToken:
+    description: GitHub token or PAT
+    required: true
+
+  base:
+    description: Base branch
+    required: false
+    default: main
+
+  head:
+    description: Head branch
+    required: false
+    default: develop
+
+  title:
+    description: Pull request title
+    required: true
+
+  body:
+    description: Pull request body
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Create Pull Request
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.githubToken }}
+      run: |
+        gh pr create \
+          --base "${{ inputs.base }}" \
+          --head "${{ inputs.head }}" \
+          --title "${{ inputs.title }}" \
+          --body "${{ inputs.body }}"

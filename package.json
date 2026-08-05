@@ -30,9 +30,12 @@
     ]
   },
   "release-it": {
-    "extends": "./projects/release-it-config/.release-it.js"
+    "extends": "./projects/release-it-config/src/.release-it.ts"
   },
   "dependencies": {
     "glob": "^13.0.6"
+  },
+  "pr": {
+    "base": "develop"
   }
 }

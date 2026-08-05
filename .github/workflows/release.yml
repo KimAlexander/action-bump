@@ -1,4 +1,5 @@
-name: ⚠️ Bump ver
+name: Version bump
+
 on:
   workflow_dispatch:
     inputs:
@@ -13,43 +14,23 @@ on:
           - major
 
 jobs:
-  run-release:
-    name: Release
-    if: "!contains(github.event.head_commit.message, 'chore(release)')"
+  bump-version:
+    name: Bump version
     runs-on: ubuntu-latest
     steps:
-      - name: Check PAT
-        env:
-          PAT: ${{ secrets.PAT_FOR_BOT }}
-        run: |
-          if [ -z "$PAT" ]; then
-            echo "PAT_FOR_BOT is EMPTY"
-            exit 1
-          else
-            echo "PAT_FOR_BOT is available"
-          fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: KimAlexander/action-bump/actions/release-it@develop # main
-        id: release-it
+      - uses: KimAlexander/action-bump/actions/release-it@develop
         with:
-          mode: ${{ github.event.inputs.mode }}
+          mode: ${{ github.event.inputs.mode || 'minor' }}
           githubToken: ${{ secrets.PAT_FOR_BOT }}
-      - name: Log release outputs
-        run: |
-          echo "Version: v${{ steps.info.outputs.version }}"
-          echo "Name: ${{ steps.info.outputs.name }}"
-      - name: Push branch
-        run: |
-          git push -u origin feature/bump_ver
-      - name: Create PR
-        env:
-          GH_TOKEN: ${{ secrets.PAT_FOR_BOT }}
-        run: |
-          gh pr create \
-            --base develop \
-            --head feature/bump_ver \
-            --title "Merge feature/bump_ver into develop" \
-            --body "Automated PR created by GitHub Actions."
+      - uses: KimAlexander/action-bump/actions/read-package-json@develop
+        id: info
+      - uses: KimAlexander/action-bump/actions/create-pr@develop
+        with:
+          githubToken: ${{ secrets.PAT_FOR_BOT }}
+          base: ${{ steps.info.outputs.base }}
+          head: feature/bump_ver
+          title: "Bump version to ${{ steps.info.outputs.version }}"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
